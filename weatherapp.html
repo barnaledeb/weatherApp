@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+<style> 
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f8ff;
+      text-align: center;
+      padding: 20px;
+    }
+    h1 {
+      color: #333;
+    }
+    input {
+      padding: 10px;
+      width: 250px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      padding: 10px 20px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    #weather-container {
+      margin-top: 20px;
+      font-size: 18px;
+    }
+    #weather-icon {
+      width: 50px;
+      height: 50px;
+    }</style>
+</head>
+<body>
+  <h1>Weather App</h1>
+  <input type="text" id="city-input" placeholder="Enter city name" />
+  <button id="get-weather">Get Weather</button>
+  <div id="weather-container"></div>
+</body>
+</html>
+<script>// JavaScript for Weather App
+
+    const apiKey = '136b378aa39df45706bd7dfa6836251a' // Replace with your OpenWeatherMap API key
+    const weatherContainer = document.getElementById('weather-container');
+    const getWeatherButton = document.getElementById('get-weather');
+    const cityInput = document.getElementById('city-input');
+    
+    // Function to fetch weather data
+    async function fetchWeather(city) {
+      try {
+        // Clear previous data
+        weatherContainer.textContent = 'Fetching weather data...';
+    
+        // API call
+        const response = await fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`
+        );
+    
+        // Check for errors
+        if (!response.ok) {
+          throw new Error('City not found');
+        }
+    
+        const data = await response.json();
+    
+        // Display weather data
+        displayWeather(data);
+      } catch (error) {
+        weatherContainer.textContent = `Error: ${error.message}`;
+      }
+    }
+    
+    // Function to display weather data
+    function displayWeather(data) {
+        console.log(data)
+        let{}
+      
+    }
+    
+    // Event listener for button click
+    getWeatherButton.addEventListener('click', () => {
+      const city = cityInput.value.trim();
+      if (city) {
+        fetchWeather(city);
+      } else {
+        weatherContainer.textContent = 'Please enter a city name.';
+      }
+    });
+    </script>
